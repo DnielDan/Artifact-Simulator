@@ -41,7 +41,7 @@ string getBaseStat(ArtifactType type) {
     }
 }
 
-vector<string> getSubStats() {
+vector<string> getSubStats(const string& baseStat) {
     vector<string> possibleSubStats = {
         "HP+209.13", "HP+239.00", "HP+268.88", "HP+298.75",
         "ATK+13.62", "ATK+15.56", "ATK+17.51", "ATK+19.45",
@@ -56,13 +56,15 @@ vector<string> getSubStats() {
     };
     vector<string> subStats;
     unordered_set<string> chosenTypes;
-    int numSubStats = 3 + rand() % 2; 
+    int numSubStats = (rand() % 100 < 18) ? 4 : 3;
+
+    string baseStatType = baseStat.substr(0, baseStat.find('+'));
 
     while (subStats.size() < numSubStats) {
         random_shuffle(possibleSubStats.begin(), possibleSubStats.end());
         for (const auto& subStat : possibleSubStats) {
             string type = subStat.substr(0, subStat.find('+'));
-            if (chosenTypes.find(type) == chosenTypes.end()) {
+            if (chosenTypes.find(type) == chosenTypes.end() && type != baseStatType) {
                 subStats.push_back(subStat);
                 chosenTypes.insert(type);
                 if (subStats.size() == numSubStats) break;
@@ -74,7 +76,8 @@ vector<string> getSubStats() {
 
 Artifact generateArtifact() {
     ArtifactType type = static_cast<ArtifactType>(rand() % 5);
-    Artifact artifact = {type, getBaseStat(type), getSubStats()};
+    string baseStat = getBaseStat(type);
+    Artifact artifact = {type, baseStat, getSubStats(baseStat)};
     return artifact;
 }
 
