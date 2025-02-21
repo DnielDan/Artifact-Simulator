@@ -1,4 +1,6 @@
 # Artifact-Simulator
+To run simulation: Copy and paste code into a cpp file in your preferred IDE and run through g++
+
 Genshin Impact accurate artifact simulator returning number of runs and resin used to output desired artifact piece, main stat, and substats.
 
 There are 5 different types of artifacts in the game [Flower, Feather, Sands, Circlet, Goblet] each having an equal chance of dropping after completing a domain run. A domain run costs 20 resin and you get 1 resin every 8 minutes(Offline/Online) or 180 per day (9 runs) with a capacity of 200 resin. A run has a 100% chance to drop one 5 star artifact and a 7% chance to drop two. The chances of one of the five artifacts dropping is equal. Artifacts all have one base stats and three to four substats(new). An artifact has an 18% chance to drop with four substats. 
